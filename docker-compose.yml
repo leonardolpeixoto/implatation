@@ -1,7 +1,7 @@
 version: '3'
 services:
   mysql:
-    image: mysql:5.7
+    image: mysql:5.6
     volumes:
       - ./db_data:/var/lib/mysql
     networks: 
@@ -20,24 +20,24 @@ services:
     image: leonardo/teravoz
     container_name: teravoz
     ports:
-      - "3001"
+      - "3001:3001"
     networks: 
       - production-network
     depends_on:
-      - "mysql"
+      - mysql
   
   client:
     build:
       dockerfile: ./docker/client.dockerfile
       context: .
-    image: leonardo/teravoz
-    container_name: teravoz
+    image: leonardo/client
+    container_name: client
     ports:
-      - "3000"
+      - "3000:3000"
     networks: 
       - production-network
     depends_on:
-      - "teravoz"
+      - teravoz
   
   
 networks: 

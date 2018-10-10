@@ -6,7 +6,8 @@ ENV NODE_ENV=development
 COPY ./teravoz /var/www
 WORKDIR /var/www
 
-RUN npm i && npm run seed
+RUN mv .env.exemplo .env
+RUN npm i
 
 ENTRYPOINT ["npm", "start"]
 
